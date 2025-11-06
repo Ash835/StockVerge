@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -444,80 +445,88 @@
         }
     </style>
 </head>
+
 <body>
-    <div class="container">
-        <aside class="sidebar">
-            <div class="logo-container">
-                <div class="logo">StockVerge</div>
-            </div>
-            <nav>
-                <a href="#" class="menu-item active">
-                    <i class="fas fa-chart-line"></i>
-                    <span>Demand Forecast</span>
-                </a>
-                <a href="#" class="menu-item">
-                    <i class="fas fa-boxes"></i>
-                    <span>Manage Inventory</span>
-                </a>
-                <a href="#" class="menu-item">
-                    <i class="fas fa-users"></i>
-                    <span>Community Forum</span>
-                </a>
-                <a href="#" class="menu-item">
-                    <i class="fas fa-robot"></i>
-                    <span>Procurement Chatbot</span>
-                </a>
-                <a href="#" class="menu-item">
-                    <i class="fas fa-cog"></i>
-                    <span>Settings</span>
-                </a>
-                <a href="#" class="menu-item">
-                    <i class="fas fa-sign-out-alt"></i>
-                    <span>Logout</span>
-                </a>
-            </nav>
-        </aside>
 
-        <main class="main-content">
-            <div class="header">
-                <div class="search-bar">
-                    <input type="text" placeholder="Search material...">
-                    <i class="fas fa-search"></i>
-                </div>
-                <div class="user-profile">
-                    <i class="fas fa-user"></i>
-                </div>
-            </div>
+    <nav>
+        <ul>
 
-            <div class="content-card">
-                <h1 class="page-title">Demand Forecast</h1>
-                
-                <div class="chart-container">
-                    <canvas id="demandChart" class="chart"></canvas>
-                </div>
+            <div class="container">
+                <aside class="sidebar">
+                    <div class="logo-container">
+                        <div class="logo">StockVerge</div>
+                    </div>
+                    <nav>
+                        <a href="{{ url_for('demand_forecast') }}" class="menu-item active">
+                            <i class="fas fa-chart-line"></i>
+                            <span>Demand Forecast</span>
+                        </a>
+                        <a href="{{ url_for('manage_inventory') }}" class="menu-item">
+                            <i class="fas fa-boxes"></i>
+                            <span>Manage Inventory</span>
+                        </a>
+                        <a href="{{ url_for('community_forum') }}" class="menu-item">
+                            <i class="fas fa-users"></i>
+                            <span>Community Forum</span>
+                        </a>
+                        <a href="{{ url_for('procurement_chatbot') }}" class="menu-item">
+                            <i class="fas fa-robot"></i>
+                            <span>Procurement Chatbot</span>
+                        </a>
+                        <a href="{{ url_for('settings') }}" class="menu-item">
+                            <i class="fas fa-cog"></i>
+                            <span>Settings</span>
+                        </a>
+                        <a href=# class="menu-item" id="logout-btn">
+                            <i class="fas fa-sign-out-alt"></i>
+                            <span>Logout</span>
+                        </a>
+                        </a>
+                    </nav>
+                </aside>
 
-                <div class="insights-section">
-                    <h2 class="insights-title">
-                        <i class="fas fa-lightbulb"></i>
-                        AI Insights
-                    </h2>
-                    <div class="insight-item">
-                        Predicted increase in steel rod demand by <strong>12% next week</strong>.
+                <main class="main-content">
+                    <div class="header">
+                        <div class="search-bar">
+                            <input type="text" placeholder="Search material...">
+                            <i class="fas fa-search"></i>
+                        </div>
+                        <div class="user-profile">
+                            <i class="fas fa-user"></i>
+                        </div>
                     </div>
-                    <div class="insight-item">
-                        Suggested reorder date: <strong>28 Oct 2025</strong>.
+
+                    <div class="content-card">
+                        <h1 class="page-title">Demand Forecast</h1>
+
+                        <div class="chart-container">
+                            <canvas id="demandChart" class="chart"></canvas>
+                        </div>
+
+                        <div class="insights-section">
+                            <h2 class="insights-title">
+                                <i class="fas fa-lightbulb"></i>
+                                AI Insights
+                            </h2>
+                            <div class="insight-item">
+                                Predicted increase in steel rod demand by <strong>12% next week</strong>.
+                            </div>
+                            <div class="insight-item">
+                                Suggested reorder date: <strong>28 Oct 2025</strong>.
+                            </div>
+                            <div class="insight-item">
+                                Optimal purchase quantity: <strong>250 units</strong>.
+                            </div>
+                            <button class="download-btn">
+                                <i class="fas fa-download"></i>
+                                Download Report
+                            </button>
+                        </div>
                     </div>
-                    <div class="insight-item">
-                        Optimal purchase quantity: <strong>250 units</strong>.
-                    </div>
-                    <button class="download-btn">
-                        <i class="fas fa-download"></i>
-                        Download Report
-                    </button>
-                </div>
+                </main>
             </div>
-        </main>
-    </div>
+        </ul>
+    </nav>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
     <script>
@@ -590,6 +599,22 @@
                 }
             }
         });
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const logoutBtn = document.getElementById("logout-btn");
+
+            logoutBtn.addEventListener("click", function (event) {
+                event.preventDefault();
+
+                const confirmLogout = confirm("Are you sure you want to logout?");
+                if (confirmLogout) {
+                    window.location.href = "{{ url_for('home') }}";
+                }
+            });
+        });
+
+
     </script>
 </body>
+
 </html>
